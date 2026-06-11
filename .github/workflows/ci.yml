@@ -20,4 +20,3 @@ jobs:
 
       - name: version name
         run: go-version
-             exit(0)
