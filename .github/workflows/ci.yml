@@ -19,4 +19,5 @@ jobs:
           go-version: "1.26.0"
 
       - name: version name
-        run: go version
+        run: print(go-version)
+             exit(0)
