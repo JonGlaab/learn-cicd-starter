@@ -1,8 +1,8 @@
 # learn-cicd-starter (Notely)
 
-https://github.com/JonGlaab/learn-cicd-starter/actions/workflows/ci.yml/badge.svg
 
-![hot bunny action](https://img.magnific.com/premium-photo/white-rabbit-garden-fluffy-bunny-green-grass-summer-time_288539-2320.jpg)
+
+![passing badge lol](https://github.com/JonGlaab/learn-cicd-starter/actions/workflows/ci.yml/badge.svg)
 
 This repo contains the starter code for the "Notely" application for the "Learn CICD" course on [Boot.dev](https://boot.dev).
 
