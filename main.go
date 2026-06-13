@@ -92,7 +92,7 @@ func main() {
 		Addr:    ":" + port,
 		Handler: router,
 	}
-	
-	log.Printf("Server starting on port %s\n", port)
+
+	log.Println("Server starting on port", port)
 	log.Fatal(srv.ListenAndServe())
 }
