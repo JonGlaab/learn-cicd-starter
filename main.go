@@ -26,8 +26,8 @@ var staticFiles embed.FS
 
 func main() {
 	err := godotenv.Load(".env")
-	if _, err := strconv.Atoi(port); err != nil {
-		log.Fatal("PORT must be a valid number")
+	if err != nil {
+		log.Println("warning: assuming default configuration. .env file not found")
 	}
 
 	port := os.Getenv("PORT")
