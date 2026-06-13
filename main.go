@@ -26,8 +26,8 @@ var staticFiles embed.FS
 
 func main() {
 	err := godotenv.Load(".env")
-	if err != nil {
-		log.Printf("warning: assuming default configuration. .env unreadable: %v", err)
+	if _, err := strconv.Atoi(port); err != nil {
+		log.Fatal("PORT must be a valid number")
 	}
 
 	port := os.Getenv("PORT")
@@ -67,12 +67,12 @@ func main() {
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		f, err := staticFiles.Open("static/index.html")
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
 			return
 		}
 		defer f.Close()
 		if _, err := io.Copy(w, f); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
 		}
 	})
 
@@ -93,6 +93,6 @@ func main() {
 		Handler: router,
 	}
 
-	log.Printf("Serving on port: %s\n", port)
+	log.Println("Server starting on port " + port)
 	log.Fatal(srv.ListenAndServe())
 }
