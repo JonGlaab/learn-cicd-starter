@@ -26,8 +26,6 @@ func TestGetAPIKeyMissingHeader(t *testing.T) {
     // Create empty headers (do NOT set the Authorization header)
     headers := http.Header{}
 
-	//headers.Set("Authorization", "ApiKey my-secret-api-key-12345")
-
     // Call the function
     _, err := GetAPIKey(headers)
 
