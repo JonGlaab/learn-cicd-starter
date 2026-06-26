@@ -19,3 +19,15 @@ jobs:
                 
           - name: Build app
             run: "./scripts/buildprod.sh"
+
+          - name: Authenticate with Google Cloud
+            uses: google-github-actions/auth@v2
+            with:
+              project_id: 'project-3df150e7-5b58-40ea-a45'
+
+          - name: Set up gcloud CLI
+            uses: google-github-actions/setup-gcloud@v2
+
+          - name: Deploy to Artifact Registry
+            run: |
+              gcloud builds submit --tag us-central1-docker.pkg.dev/project-3df150e7-5b58-40ea-a45/notely-ar-repo/notely-app:latest .
