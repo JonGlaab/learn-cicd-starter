@@ -1,8 +1,8 @@
 package auth
 
 import (
-    "net/http"
-    "testing"
+	"net/http"
+	"testing"
 )
 
 func TestGetAPIKey(t *testing.T) {
@@ -23,20 +23,20 @@ func TestGetAPIKey(t *testing.T) {
 }
 
 func TestGetAPIKeyMissingHeader(t *testing.T) {
-    // Create empty headers (do NOT set the Authorization header)
-    headers := http.Header{}
+	// Create empty headers (do NOT set the Authorization header)
+	headers := http.Header{}
 
-    // Call the function
-    _, err := GetAPIKey(headers)
+	// Call the function
+	_, err := GetAPIKey(headers)
 
-    // We EXPECT an error here!
-    // Specifically, we expect ErrNoAuthHeaderIncluded
-    if err == nil {
-        t.Fatalf("expected an error, got nil")
-    }
+	// We EXPECT an error here!
+	// Specifically, we expect ErrNoAuthHeaderIncluded
+	if err == nil {
+		t.Fatalf("expected an error, got nil")
+	}
 
-    // You can also verify it's the CORRECT error
-    if err != ErrNoAuthHeaderIncluded {
-        t.Errorf("expected error %v, got %v", ErrNoAuthHeaderIncluded, err)
-    }
+	// You can also verify it's the CORRECT error
+	if err != ErrNoAuthHeaderIncluded {
+		t.Errorf("expected error %v, got %v", ErrNoAuthHeaderIncluded, err)
+	}
 }
