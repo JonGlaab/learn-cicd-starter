@@ -30,8 +30,10 @@ jobs:
               # 2. Tell gcloud your account name is your lab email
               gcloud config set account "jonglaab@gmail.com"
               
-              # 3. Securely pipe the access token directly into gcloud auth
-              echo "$GCP_ACCESS_TOKEN" | gcloud auth login --username="jonglaab@gmail.com" --no-launch-browser
+              # 3. Use the direct token exchange format gcloud expects
+              echo '{"client_id": "","client_secret": "","refresh_token": "'$GCP_ACCESS_TOKEN'","type": "authorized_user"}' > token.json
+              gcloud auth login --cred-file=token.json
               
-              # 4. Kick off the build
+              # 4. Kick off the build and clean up
+              rm token.json
               gcloud builds submit --tag us-central1-docker.pkg.dev/project-3df150e7-5b58-40ea-a45/notely-ar-repo/notely-app:latest .
