@@ -27,8 +27,8 @@ jobs:
               # 1. Force gcloud to look at your lab project
               gcloud config set project project-3df150e7-5b58-40ea-a45
               
-              # 2. Authenticate using your temporary token secret
-              gcloud config set auth/credential_id "$GCP_ACCESS_TOKEN"
+              # 2. Inject the token directly into the gcloud runtime environment
+              export CLOUDSDK_AUTH_ACCESS_TOKEN="$GCP_ACCESS_TOKEN"
               
               # 3. Kick off the build
               gcloud builds submit --tag us-central1-docker.pkg.dev/project-3df150e7-5b58-40ea-a45/notely-ar-repo/notely-app:latest .
