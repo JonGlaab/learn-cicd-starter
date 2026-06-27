@@ -27,10 +27,11 @@ jobs:
               # 1. Force gcloud to look at your lab project
               gcloud config set project project-3df150e7-5b58-40ea-a45
               
-              # 2. Feed gcloud a dummy config to bypass the active account check
-              echo "{\"type\": \"authorized_user\", \"client_id\": \"\", \"client_secret\": \"\", \"refresh_token\": \"$GCP_ACCESS_TOKEN\"}" > dummy_creds.json
-              gcloud auth activate-service-account --key-file=dummy_creds.json || gcloud auth login --cred-file=dummy_creds.json
+              # 2. Tell gcloud your account name is your lab email
+              gcloud config set account "jonglaab@gmail.com"
               
-              # 3. Clean up the dummy file and kick off the build
-              rm dummy_creds.json
+              # 3. Securely pipe the access token directly into gcloud auth
+              echo "$GCP_ACCESS_TOKEN" | gcloud auth login --username="jonglaab@gmail.com" --no-launch-browser
+              
+              # 4. Kick off the build
               gcloud builds submit --tag us-central1-docker.pkg.dev/project-3df150e7-5b58-40ea-a45/notely-ar-repo/notely-app:latest .
